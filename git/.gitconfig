@@ -1,0 +1,9 @@
+[init]
+	defaultBranch = main
+[user]
+	email = 80985309+valonsodev@users.noreply.github.com
+	name = Víctor Alonso
+[core]
+	editor = nano -w
+[push]
+	autoSetupRemote = true

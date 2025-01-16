@@ -8,7 +8,7 @@ stow -t $HOME -d $SCRIPT_DIR atuin
 
 stow -t $HOME -d $SCRIPT_DIR flameshot
 
-sudo stow -t /etc/greetd -d $SCRIPT_DIR greetd
+sudo stow -t /etc/sddm.conf.d -d $SCRIPT_DIR sddm
 
 stow -t $HOME -d $SCRIPT_DIR hypr
 
@@ -19,3 +19,5 @@ stow -t $HOME -d $SCRIPT_DIR theming
 stow -t $HOME -d $SCRIPT_DIR waybar
 
 stow -t $HOME -d $SCRIPT_DIR zsh
+
+stow -t $HOME -d $SCRIPT_DIR git
