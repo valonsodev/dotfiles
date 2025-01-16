@@ -1,0 +1,10 @@
+[Unit]
+Description=Select and Copy a Random Background
+Before=greetd.service
+
+[Service]
+Type=oneshot
+ExecStart=~/.config/theming/randombg.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+// Japan-Dark
+
+* {
+  font:       "JetBrains NF Medium 11";
+  bg:         #1A1A1A;
+  fg:         #f3f3f3;
+  se:           @fg;
+  red:        #ed3c50;
+  green:      #42b883;
+  yellow:     #e6db87;
+  blue:       #3b8eed;
+  magenta:    #EBBDCB;
+  cyan:       #a3b1cc;
+}
