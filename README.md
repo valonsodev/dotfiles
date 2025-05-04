@@ -13,8 +13,9 @@ The following apps track their own config files:
 -  atuin (docs suggest)
 
 The following apps need manual reload:
-- waybar (when style.css changes)
+- waybar (when style.css changes SIGUSR2)
 - hyprpaper (when .config/theming/wallpaper.png changes)
+- hyprlock (the background image with SIGUSR2)
 
 
 ## To set permission bits on files
@@ -33,3 +34,5 @@ Me falta un notification daemon #dunst
 Añadir colores a rofi
 
 me falta migrar algun dotfile (los de root) /etc
+
+me falta mirar los encrypted files de chezmoi
