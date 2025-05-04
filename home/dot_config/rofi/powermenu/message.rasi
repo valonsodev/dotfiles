@@ -1,0 +1,18 @@
+@import "~/.config/rofi/colors.rasi"
+
+* {
+  background-color:       @bg;
+  text-color:             @fg;
+}
+
+window {
+  width:      						360px;
+  padding:    						25px;
+  border:									2px;
+  border-color:           #ffffff;
+}
+
+entry {
+  expand: 								true;
+  text-color:							@fg;
+}

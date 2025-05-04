@@ -1,0 +1,176 @@
+{{ $theme := (include "dot_config/theming/theme.json" | fromJson) }}
+
+* {
+    font-family: JetBrainsMono NF, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+}
+
+window#waybar {
+    background-color: {{ $theme.surfaceContainer }};
+    border-bottom: none;
+    color: {{ $theme.onSurface }};
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: {{ $theme.surface }};
+}
+*/
+
+window#waybar.termite {
+    background-color: {{ $theme.surfaceDim }};
+}
+
+window#waybar.chromium {
+    background-color: {{ $theme.background }};
+    border: none;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+}
+
+#pulseaudio:hover {
+    background-color: {{ $theme.tertiary }};
+}
+
+#workspaces button {
+    padding: 3pt 6pt;
+    background-color: transparent;
+    color: {{ $theme.onSurface }};
+}
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -3px {{ $theme.primary }};
+}
+
+#workspaces button.urgent {
+    background-color: {{ $theme.error }};
+}
+
+#workspaces button.active {
+    box-shadow: inset 0 -3px {{ $theme.primary }};
+    color: {{ $theme.primary }};
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#wireplumber,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#scratchpad,
+#power-profiles-daemon,
+#mpd {
+    padding: 0 10px;
+    color: {{ $theme.onSurface }};
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+.modules-right > *{
+    margin: 0px;
+}
+label:focus {
+    background-color: {{ $theme.background }};
+}
+
+#network {
+    background-color: {{ $theme.secondary }};
+    color: {{ $theme.onSecondary }};
+    padding: 0 12pt;
+    margin: 0px;
+}
+
+#network.disconnected {
+    background-color: {{ $theme.error }};
+    color: {{ $theme.onError }};
+}
+
+#pulseaudio {
+    background-color: {{ $theme.tertiary }};
+    color: {{ $theme.onTertiary }};
+    min-width: 40pt;
+}
+
+#pulseaudio.muted {
+    background-color: {{ $theme.error }};
+    color: {{ $theme.onError }};
+}
+
+#tray {
+    background-color: {{ $theme.secondary }};
+    color: {{ $theme.onSecondary }};
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: {{ $theme.error }};
+    color: {{ $theme.onError }};
+}
+
+/* Keyboard state (numlock capslock) */
+#keyboard-state {
+    background: {{ $theme.primary }};
+    color: {{ $theme.onPrimary }};
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 12pt;
+}
+
+#keyboard-state > label.locked {
+    background: {{ $theme.error }};
+    color: {{ $theme.onError }};
+}
+
+#cpu {
+    background-color: {{ $theme.secondaryContainer }};
+    color: {{ $theme.onSecondaryContainer }};
+}
+
+#custom-power {
+    padding: 0 12pt;
+    font-size: 16px;
+}
+#disk {
+    min-width: 164px;
+}
+#disk:hover {
+    color: {{ $theme.surfaceBright }};
+}

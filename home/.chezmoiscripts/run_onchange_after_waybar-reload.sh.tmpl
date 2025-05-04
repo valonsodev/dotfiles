@@ -1,0 +1,10 @@
+#!/bin/sh
+
+{{ $waybarDir := joinPath .chezmoi.homeDir ".config" "waybar" }}
+{{ $waybarConfig := joinPath $waybarDir "config.jsonc" }}
+{{ $waybarStyle := joinPath $waybarDir "style.css" }}
+# {{ $waybarConfig }} hash: {{ include $waybarConfig | sha256sum }}
+# {{ $waybarStyle }} hash: {{ include $waybarStyle | sha256sum }}
+
+
+pkill -SIGUSR2 waybar 2> /dev/null

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+{{ $watchedFile := joinPath .chezmoi.homeDir ".config" "theming" "wallpaper.png" }}
+# {{ $watchedFile }}
+# wallpaper.png hash: {{ include $watchedFile | sha256sum }}
+
+pkill -SIGUSR2 hyprlock 2> /dev/null | true

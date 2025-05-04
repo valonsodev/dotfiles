@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# Define the directory containing the images
+{{ $sourceDir := joinPath .chezmoi.sourceDir "dot_config" "theming" }}
+IMAGE_DIR="{{ joinPath $sourceDir "wallpapers" }}"
+
+{{ $outputFile := joinPath $sourceDir "wallpaper.png" }}
+# Define the output file
+OUTPUT_FILE="{{ $outputFile }}"
+
+# Select a random image
+RANDOM_IMAGE=$(find "$IMAGE_DIR" -type f | shuf -n 1)
+
+# Copy the selected image to the output file location
+cp "$RANDOM_IMAGE" "$OUTPUT_FILE"
+{{ $materialThemeCli := joinPath .chezmoi.homeDir ".config" "theming" "material_theme" }}
+{{ $materialArgs:= "--dark" }}
+{{ $materialThemeCli }} {{ $outputFile }} {{ $materialArgs }} > {{ joinPath $sourceDir "theme.json" }}
+
+chezmoi apply

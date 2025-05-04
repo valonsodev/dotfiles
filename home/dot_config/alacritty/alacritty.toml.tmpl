@@ -1,0 +1,44 @@
+{{ $theme := (include "dot_config/theming/theme.json" | fromJson) }}
+
+[general]
+live_config_reload = true
+
+[keyboard]
+bindings = [
+    { key = "Left", mods = "Control", chars = "\u001BB" }, # Skip word left
+    { key = "Back", mods = "Control", chars = "\u001b\u007f" }, # Delete word
+    { key = "Right", mods = "Control", chars = "\u001BF" }, # Skip word right
+
+    { key = "Back", mods = "Command", chars = "\u0015" }, # Delete line
+    { key = "Delete", mods = "Command", chars = "\u0015" } # Delete line
+]
+
+[window]
+dynamic_padding = true
+padding = { x = 10, y = 10 }
+
+[scrolling]
+history = 100000
+
+[font]
+normal = { family = "monospace", style = "Regular" }
+
+[colors.primary]
+background = "{{ $theme.background }}"
+foreground = "{{ $theme.onBackground }}"
+
+[colors.normal]
+green   = "#90a959"
+red     = "{{ $theme.error }}"
+yellow  = "#ffc517"
+black   = "#1a1a1a"
+blue    = "#3b8eed"
+magenta = "#de41e0"
+white   = "#f3f3f3"
+
+[cursor]
+style.shape = "Beam"
+thickness = 0.15
+
+[terminal]
+shell = { program = "zsh", args = [] }

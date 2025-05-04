@@ -1,0 +1,113 @@
+// ██████╗  ██████╗ ██╗    ██╗███████╗██████╗ ███╗   ███╗███████╗███╗   ██╗██╗   ██╗
+// ██╔══██╗██╔═══██╗██║    ██║██╔════╝██╔══██╗████╗ ████║██╔════╝████╗  ██║██║   ██║
+// ██████╔╝██║   ██║██║ █╗ ██║█████╗  ██████╔╝██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║
+// ██╔═══╝ ██║   ██║██║███╗██║██╔══╝  ██╔══██╗██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║
+// ██║     ╚██████╔╝╚███╔███╔╝███████╗██║  ██║██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝
+// ╚═╝      ╚═════╝  ╚══╝╚══╝ ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝ 
+
+
+configuration {
+    show-icons:                     false;
+    icon-theme: 					"Papirus";
+    drun-display-format:            "{name}";
+    disable-history:                false;
+    sidebar-mode: 					false;
+}
+
+@import "~/.config/rofi/colors.rasi"
+
+window {
+    transparency:                   "real";
+    text-color:                     @fg;
+    width:							100%;
+    height:							100%;
+}
+
+prompt {
+    enabled: 						true;
+    padding:                        1% 1% 1% 0%;
+    background-color: 				@blue;
+    text-color:                     @fg;
+    border-color:                  	@fg;
+    }
+
+textbox-prompt-colon {
+    expand: 						false;
+    str: 							"System |";
+    background-color: 				@blue;
+    text-color:                     @fg;
+    border-color:                  	@fg;
+        padding:                        1% 0.5% 1% 0.5%;
+}
+
+inputbar {
+    children: 						[ textbox-prompt-colon, prompt ];
+    background-color:               @blue;
+    text-color:                     @fg;
+    expand:                         false;
+    border:                  		0;
+    border-color:                  	@bg;
+    margin:                         0% 59.3% 0% 0%;
+    padding:                        0.5%;
+    position:                       center;
+}
+
+listview {
+    background-color:               transparent;
+    margin:                         0% 0% 0% 0%;
+    spacing:                        3%;
+    cycle:                          true;
+    dynamic:                        true;
+    layout:                         horizontal;
+}
+
+mainbox {
+    background-color:               @bg;
+    children:                       [ inputbar, listview ];
+    spacing:                        5%;
+    padding:                        32.50% 0% 0% 10%;
+}
+
+element {
+    background-color:               @blue;
+    text-color:                     @bg;
+    orientation:                    horizontal;
+}
+
+element-text {
+    background-color: 				#00000000;
+    text-color:       				inherit;
+    font:							"feather 50";
+    expand:                         true;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    margin:                         6.5% 3.5% 6.5% 3.5%;
+}
+
+element normal.urgent,
+element alternate.urgent {
+    background-color:               @red;
+    text-color:                     @fg;
+}
+
+element normal.active,
+element alternate.active {
+    background-color:               @blue;
+    text-color:                     @fg;
+}
+
+element selected {
+    background-color:               @blue;
+    text-color:                     @fg;
+    border-color:                  	@fg;
+}
+
+element selected.urgent {
+    background-color:               @red;
+    text-color:                     @fg;
+}
+
+element selected.active {
+    background-color:               @blue;
+    color:                          @fg;
+}

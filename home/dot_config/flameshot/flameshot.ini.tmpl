@@ -1,0 +1,135 @@
+{{ $theme := (include "dot_config/theming/theme.json" | fromJson) }}
+[General]
+;; Opacity of area outside selection (int in range 0-255)
+contrastOpacity=188
+
+;; Whether the tray icon is disabled (bool)
+disabledTrayIcon=true
+
+;; Filename pattern using C++ strftime formatting
+filenamePattern=%s-%H-%d-%Y
+
+;; Show the help screen on startup (bool)
+showHelp=false
+
+;; Show the side panel button (bool)
+showSidePanelButton=false
+
+;; Default file extension for screenshots
+saveAsFileExtension=.png
+
+;; Main UI color
+;; Color is any valid hex code or W3C color name
+uiColor={{ $theme.primary | default "#740096" }}
+
+;; Contrast UI color
+;; Color is any valid hex code or W3C color name
+contrastUiColor={{ $theme.secondaryContainer | default "#270032" }}
+
+;; Last used color
+;; Color is any valid hex code or W3C color name
+drawColor={{ $theme.error | default "#ff0000" }}
+
+;; Show desktop notifications (bool)
+showDesktopNotification=true
+
+;; Launch at startup (bool)
+startupLaunch=true
+
+;; Save image after copy (bool)
+saveAfterCopy=false
+
+;; Use JPG format instead of PNG (bool)
+useJpgForClipboard=false
+
+;; List of colors for color picker
+;; The colors are arranged counter-clockwise with the first being set to the right of the cursor
+;; Colors are any valid hex code or W3C color name
+;; "picker" adds a custom color picker
+userColors=picker, {{ $theme.primary | default "#800000" }}, {{ $theme.error | default "#ff0000" }}, {{ $theme.secondary | default "#00ff00" }}, {{ $theme.tertiary | default "#008000" }}, {{ $theme.secondaryContainer | default "#00ffff" }}, {{ $theme.primaryContainer | default "#0000ff" }}, {{ $theme.surface | default "#ff00ff" }}, {{ $theme.onSurface | default "#800080" }}
+
+
+;; DEFAULTS
+;
+;; Image Save Path
+;savePath=/tmp
+;
+;; Whether the savePath is a fixed path (bool)
+;savePathFixed=false
+;
+;; Ignore updates to versions less than this value
+;ignoreUpdateToVersion=
+;
+;; Disable Grim Warning notification
+;disabledGrimWarning=true
+;
+;; Automatically close daemon when it's not needed (not available on Windows)
+;autoCloseIdleDaemon=false
+;
+;; Allow multiple instances of `flameshot gui` to run at the same time
+;allowMultipleGuiInstances=false
+;
+;; Last used tool thickness (int)
+;drawThickness=1
+;
+;; Keep the App Launcher open after selecting an app (bool)
+;keepOpenAppLauncher=false
+;
+;; Show greeting message on startup (bool)
+;showStartupLaunchMessage=true
+;
+;; Copy path to image after save (bool)
+;copyPathAfterSave=false
+;
+;; On successful upload, close the dialog and copy URL to clipboard.
+;copyAndCloseAfterUpload=true
+;
+;; Anti-aliasing image when zoom the pinned image (bool)
+;antialiasingPinZoom=true
+;
+;; Upload to imgur without confirmation (bool)
+;uploadWithoutConfirmation=false
+;
+;; Use larger color palette as the default one
+; predefinedColorPaletteLarge=false
+;
+;; Set JPEG Quality (int in range 0-100)
+; jpegQuality=75
+;
+;; Shortcut Settings for all tools
+;[Shortcuts]
+;TYPE_ARROW=A
+;TYPE_CIRCLE=C
+;TYPE_CIRCLECOUNT=
+;TYPE_COMMIT_CURRENT_TOOL=Ctrl+Return
+;TYPE_COPY=Ctrl+C
+;TYPE_DRAWER=D
+;TYPE_EXIT=Ctrl+Q
+;TYPE_IMAGEUPLOADER=Return
+;TYPE_MARKER=M
+;TYPE_MOVESELECTION=Ctrl+M
+;TYPE_MOVE_DOWN=Down
+;TYPE_MOVE_LEFT=Left
+;TYPE_MOVE_RIGHT=Right
+;TYPE_MOVE_UP=Up
+;TYPE_OPEN_APP=Ctrl+O
+;TYPE_PENCIL=P
+;TYPE_PIN=
+;TYPE_PIXELATE=B
+;TYPE_RECTANGLE=R
+;TYPE_REDO=Ctrl+Shift+Z
+;TYPE_RESIZE_DOWN=Shift+Down
+;TYPE_RESIZE_LEFT=Shift+Left
+;TYPE_RESIZE_RIGHT=Shift+Right
+;TYPE_RESIZE_UP=Shift+Up
+;TYPE_SYM_RESIZE_DOWN=Ctrl+Shift+Down
+;TYPE_SYM_RESIZE_LEFT=Ctrl+Shift+Left
+;TYPE_SYM_RESIZE_RIGHT=Ctrl+Shift+Right
+;TYPE_SYM_RESIZE_UP=Ctrl+Shift+Up
+;TYPE_SAVE=Ctrl+S
+;TYPE_SELECTION=S
+;TYPE_SELECTIONINDICATOR=
+;TYPE_SELECT_ALL=Ctrl+A
+;TYPE_TEXT=T
+;TYPE_TOGGLE_PANEL=Space
+;TYPE_UNDO=Ctrl+Z
