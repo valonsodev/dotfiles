@@ -1,6 +1,8 @@
+{{ warnf "dot_config/hypr/hyprlock.conf.tmpl\n" }}
+
 source = ~/.config/hypr/material.conf
 
-$font = JetBrainsMono Nerd Font
+$font = {{ $.font.family }}
 
 # GENERAL
 general {

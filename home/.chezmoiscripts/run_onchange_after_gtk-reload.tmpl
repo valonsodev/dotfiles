@@ -1,0 +1,15 @@
+{{ warnf ".chezmoiscripts/run_onchange_after_gtk-reload.tmpl\n" -}}
+
+#!/bin/sh
+
+{{ $configFolder := joinPath .chezmoi.homeDir ".config" }}
+
+{{ $gtkStyles := joinPath $configFolder "gtk" "gtk.css" }} # Watch GTK styles (derived from theme.json)
+# {{ $gtkStyles }} hash: {{ include $gtkStyles | sha256sum }}
+
+cp -f {{ $gtkStyles }} {{ $configFolder }}/gtk-3.0/gtk.css
+cp -f {{ $gtkStyles }} {{ $configFolder }}/gtk-3.0/gtk-dark.css
+cp -f {{ $gtkStyles }} {{ $configFolder }}/gtk-4.0/gtk.css
+cp -f {{ $gtkStyles }} {{ $configFolder }}/gtk-4.0/gtk-dark.css
+
+gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark

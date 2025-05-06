@@ -1,7 +1,9 @@
-{{ $theme := (include "dot_config/theming/theme.json" | fromJson) }}
+{{ warnf "dot_config/waybar/style.css.tmpl\n" -}}
+
+{{ $theme := (include (joinPath .chezmoi.homeDir ".config" "theming" "theme.json") | fromJson) -}}
 
 * {
-    font-family: JetBrainsMono NF, Roboto, Helvetica, Arial, sans-serif;
+    font-family: {{ $.font.family }}, Roboto, Helvetica, Arial, sans-serif;
     font-size: 13px;
 }
 

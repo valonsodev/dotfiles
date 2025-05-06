@@ -18,7 +18,8 @@ configuration {
 
 window {
     transparency:                   "real";
-    text-color:                     @fg;
+    text-color:                     @onSurface;
+    background-color:               @surface;
     width:							100%;
     height:							100%;
 }
@@ -26,27 +27,25 @@ window {
 prompt {
     enabled: 						true;
     padding:                        1% 1% 1% 0%;
-    background-color: 				@blue;
-    text-color:                     @fg;
-    border-color:                  	@fg;
-    }
+    background-color:               transparent;
+    text-color:                     @onPrimaryContainer;
+}
 
 textbox-prompt-colon {
     expand: 						false;
     str: 							"System |";
-    background-color: 				@blue;
-    text-color:                     @fg;
-    border-color:                  	@fg;
-        padding:                        1% 0.5% 1% 0.5%;
+    background-color:               transparent;
+    text-color:                     @onPrimaryContainer;
+    padding:                        1% 0.5% 1% 0.5%;
 }
 
 inputbar {
     children: 						[ textbox-prompt-colon, prompt ];
-    background-color:               @blue;
-    text-color:                     @fg;
+    background-color:               @primaryContainer;
+    text-color:                     @onPrimaryContainer;
     expand:                         false;
     border:                  		0;
-    border-color:                  	@bg;
+    border-color:                  	@primary;
     margin:                         0% 59.3% 0% 0%;
     padding:                        0.5%;
     position:                       center;
@@ -62,22 +61,22 @@ listview {
 }
 
 mainbox {
-    background-color:               @bg;
+    background-color:               transparent;
     children:                       [ inputbar, listview ];
     spacing:                        5%;
     padding:                        32.50% 0% 0% 10%;
 }
 
 element {
-    background-color:               @blue;
-    text-color:                     @bg;
+    background-color:               @primaryContainer;
+    text-color:                     @onPrimaryContainer;
     orientation:                    horizontal;
 }
 
 element-text {
-    background-color: 				#00000000;
+    background-color: 				transparent;
     text-color:       				inherit;
-    font:							"feather 50";
+    font:       					"@font-family 50";
     expand:                         true;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
@@ -87,27 +86,18 @@ element-text {
 element normal.urgent,
 element alternate.urgent {
     background-color:               @red;
-    text-color:                     @fg;
+    text-color:                     @onSurface;
 }
 
 element normal.active,
 element alternate.active {
-    background-color:               @blue;
-    text-color:                     @fg;
+    background-color:               @primary;
+    text-color:                     @onSurface;
 }
 
 element selected {
-    background-color:               @blue;
-    text-color:                     @fg;
-    border-color:                  	@fg;
+    background-color:               @primary;
+    text-color:                     @onPrimary;
+    border-color:                  	@onPrimary;
 }
 
-element selected.urgent {
-    background-color:               @red;
-    text-color:                     @fg;
-}
-
-element selected.active {
-    background-color:               @blue;
-    color:                          @fg;
-}

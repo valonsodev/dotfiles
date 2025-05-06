@@ -1,7 +1,9 @@
+{{ warnf ".chezmoiscripts/run_onchange_after_hyprpaper-reload.sh.tmpl\n" -}}
+
 #!/bin/sh
 
-{{ $watchedFile := joinPath .chezmoi.homeDir ".config" "theming" "wallpaper.png" }}
-# {{ $watchedFile }}
-# wallpaper.png hash: {{ include $watchedFile | sha256sum }}
+{{ $watchedFile := joinPath .chezmoi.homeDir ".config" "theming" "wallpaper.png" }} # Watch wallpaper file
+
+# {{ $watchedFile }} hash: {{ include $watchedFile | sha256sum }}
 
 hyprctl hyprpaper reload ,"{{ $watchedFile }}"

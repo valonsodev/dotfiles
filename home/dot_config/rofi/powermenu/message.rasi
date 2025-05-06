@@ -1,8 +1,8 @@
 @import "~/.config/rofi/colors.rasi"
 
 * {
-  background-color:       @bg;
-  text-color:             @fg;
+  background-color:       @background;
+  text-color:             @onSurface;
 }
 
 window {
@@ -14,5 +14,5 @@ window {
 
 entry {
   expand: 								true;
-  text-color:							@fg;
+  text-color:							@onSurface;
 }

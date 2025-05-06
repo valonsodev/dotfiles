@@ -1,0 +1,31 @@
+{{ warnf ".chezmoiscripts/run_onchange_before_generate-theme.sh.tmpl\n" -}}
+
+#!/bin/sh
+{{ $themingFolder := joinPath .chezmoi.homeDir ".config" "theming" }}
+
+
+{{ $wallpaperFile := joinPath $themingFolder "wallpaper.png" }}
+# {{ $wallpaperFile }}
+# wallpaper.png hash: {{ include $wallpaperFile | sha256sum }}
+
+{{ $materialCli := joinPath .chezmoi.homeDir ".config" "theming" "material_theme" }}
+# {{ $materialCli }}
+# material_theme hash: {{ include $materialCli | sha256sum }}
+
+
+{{ $themeJson := joinPath $themingFolder "theme.json" }}
+# {{ $themeJson }}
+
+
+
+echo "Generating theme using: '{{ $materialCli }}' '{{ $wallpaperFile }}' --dark > '{{ $themeJson }}'"
+# "{{ $materialCli }}" "{{ $wallpaperFile }}" --dark > "{{ $themeJson }}"
+
+{{ $materialCli }} "{{ $wallpaperFile }}" --dark > "{{ $themeJson }}"
+
+if [ $? -ne 0 ]; then
+    echo "Error generating theme.json with '{{ $materialCli }}'."
+    exit 1
+fi
+
+echo "Theme JSON generated at {{ $themeJson }}"

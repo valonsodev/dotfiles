@@ -1,4 +1,6 @@
-{{ $theme := (include "dot_config/theming/theme.json" | fromJson) }}
+{{ warnf "dot_config/flameshot/flameshot.ini.tmpl\n" -}}
+
+{{ $theme := (include (joinPath .chezmoi.homeDir ".config" "theming" "theme.json") | fromJson) -}}
 [General]
 ;; Opacity of area outside selection (int in range 0-255)
 contrastOpacity=188

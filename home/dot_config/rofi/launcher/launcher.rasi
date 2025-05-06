@@ -30,20 +30,20 @@ configuration {
 @import "~/.config/rofi/colors.rasi"
 
 * {
-    background-color:             	@bg;
+    background-color:             	@secondaryContainer;
 }
 
 window {
     padding: 						15;
     width: 							40%;
     border: 						3px;
-    border-color:      #3fb984; 
+    border-color:                   @secondary; 
 
 }
 
 prompt {
     spacing: 						0;
-    text-color: 					@fg;
+    text-color: 					@onSurface;
 }
 
 textbox-prompt-colon {
@@ -62,17 +62,17 @@ entry {
     background-color:            inherit;
     placeholder:                 "Search...";
     placeholder-color:           inherit;
-    text-color:                     @fg;
+    text-color:                     @onSurface;
 }
 
 case-indicator {
     spacing:    					0;
-    text-color: 					@fg;
+    text-color: 					@onSurface;
 }
 
 inputbar {
     spacing:    					4px;
-    text-color: 					@fg;
+    text-color: 					@onSurface;
     padding:    					1px;
     children: 						[ textbox-prompt-colon,entry,case-indicator ];
 }
@@ -92,7 +92,7 @@ listview {
 }
 
 element-text, element-icon {
-    background-color: #00000000;
+    background-color: transparent;
     text-color:       inherit;
 }
 element-icon {
@@ -106,42 +106,41 @@ element {
     orientation: horizontal;
     children: [ element-icon, element-text ];
     spacing: 5px;
+    background-color: 				@secondaryContainer;
+    text-color:       				@onSecondaryContainer;
+    
 }
-element normal.normal {
-    background-color: 				@bg;
-    text-color:       				@fg;
-}
+
 element normal.urgent {
-    background-color: 				@bg;
-    text-color:       				@red;
+    background-color: 				@error;
+    text-color:       				@onError;
 }
 element normal.active {
     background-color: 				@green;
-    text-color:       				@bg;
+    text-color:       				@onSurface;
 }
+
 element selected.normal {
-    background-color: 				@fg;
-    text-color:       				@bg;
+    background-color: 				@primary;
+    text-color:       				@onPrimary;
 }
 element selected.urgent {
-    background-color: 				@bg;
+    background-color: 				@secondary;
     text-color:       				@red;
 }
+
 element selected.active {
-    background-color: 				@fg;
-    text-color:       				@bg;
+    background-color: 				@error;
+    text-color:       				@onError;
 }
-element alternate.normal {
-    background-color: 				@bg;
-    text-color:       				@fg;
-}
+
 element alternate.urgent {
-    background-color: 				@bg;
-    text-color:       				@fg;
+    background-color: 				@background;
+    text-color:       				@onSurface;
 }
 element alternate.active {
-    background-color: 				@bg;
-    text-color:       				@fg;
+    background-color: 				@background;
+    text-color:       				@onSurface;
 }
 
 sidebar {
@@ -151,27 +150,27 @@ sidebar {
 button {
     horizontal-align:               0.5;
     vertical-align:                 0.5;
-    background-color:             	@fg;
+    background-color:             	@secondaryContainer;
     margin: 						5px;
     padding: 						5px;
-    text-color: 					@bg;
-    border: 						0px;
+    text-color: 					@onSecondaryContainer;
+    border: 						1px;
     border-radius: 					4px;
-    border-color: 					@fg;
+    border-color: 					@primary;
 }
 
 button selected {
-    background-color:             	@blue;
-    text-color: 					@fg;
+    background-color:             	@secondary;
+    text-color: 					@onSecondary;
     border: 						0px;
     border-radius: 					4px;
-    border-color: 					@fg;
+    border-color: 					@onSurface;
 }
 
 scrollbar {
     width:        					4px;
     border:       					0px;
-    handle-color: 					@fg;
+    handle-color: 					@secondary;
     handle-width: 					8px;
     padding:      					0;
 }
@@ -181,5 +180,5 @@ message {
 }
 
 textbox {
-    text-color: 					@fg;
+    text-color: 					@onSecondaryContainer;
 }

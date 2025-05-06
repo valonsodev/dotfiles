@@ -1,4 +1,6 @@
-{{ $theme := (include "dot_config/theming/theme.json" | fromJson) }}
+{{ warnf "dot_config/atuin/themes/material.toml.tmpl\n" -}}
+
+{{ $theme := (include (joinPath .chezmoi.homeDir ".config" "theming" "theme.json") | fromJson) -}}
 
 [theme]
 name = "material"

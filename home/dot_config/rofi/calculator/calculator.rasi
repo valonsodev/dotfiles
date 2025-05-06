@@ -21,7 +21,7 @@ configuration {
 @import "~/.config/rofi/colors.rasi"
 
 * {
-    background-color:             	@bg;
+    background-color:             	@background;
 }
 
 window {
@@ -36,7 +36,7 @@ prompt {
     margin:                         10px;
     spacing: 						0;
     border: 						0;
-    text-color: 					@fg;
+    text-color: 					@onSurface;
 }
 
 textbox-prompt-colon {
@@ -48,17 +48,17 @@ textbox-prompt-colon {
 
 entry {
     spacing:    					0;
-    text-color: 					@fg;
+    text-color: 					@onSurface;
 }
 
 case-indicator {
     spacing:    					0;
-    text-color: 					@fg;
+    text-color: 					@onSurface;
 }
 
 inputbar {
     spacing:    					0px;
-    text-color: 					@fg;
+    text-color: 					@onSurface;
     padding:    					1px;
     children: 						[ prompt,textbox-prompt-colon,entry,case-indicator ];
 }
@@ -95,40 +95,40 @@ element {
     padding: 						6px;
 }
 element normal.normal {
-    background-color: 				@bg;
-    text-color:       				@fg;
+    background-color: 				@background;
+    text-color:       				@onSurface;
 }
 element normal.urgent {
-    background-color: 				@bg;
+    background-color: 				@background;
     text-color:       				@red;
 }
 element normal.active {
-    background-color: 				@bg;
-    text-color:       				@bg;
+    background-color: 				@background;
+    text-color:       				@background;
 }
 element selected.normal {
-    background-color: 				@bg;
-    text-color:       				@fg;
+    background-color: 				@background;
+    text-color:       				@onSurface;
 }
 element selected.urgent {
-    background-color: 				@bg;
+    background-color: 				@background;
     text-color:       				@red;
 }
 element selected.active {
-    background-color: 				@bg;
-    text-color:       				@bg;
+    background-color: 				@background;
+    text-color:       				@background;
 }
 element alternate.normal {
-    background-color: 				@bg;
-    text-color:       				@fg;
+    background-color: 				@background;
+    text-color:       				@onSurface;
 }
 element alternate.urgent {
-    background-color: 				@bg;
-    text-color:       				@fg;
+    background-color: 				@background;
+    text-color:       				@onSurface;
 }
 element alternate.active {
-    background-color: 				@bg;
-    text-color:       				@fg;
+    background-color: 				@background;
+    text-color:       				@onSurface;
 }
 
 sidebar {
@@ -139,7 +139,7 @@ sidebar {
 scrollbar {
     width:        					4px;
     border:       					0px;
-    handle-color: 					@fg;
+    handle-color: 					@onSurface;
     handle-width: 					8px;
     padding:      					0;
 }
@@ -149,5 +149,5 @@ message {
 }
 
 textbox {
-    text-color: 					@fg;
+    text-color: 					@onSurface;
 }

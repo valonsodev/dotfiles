@@ -3,8 +3,8 @@
 *{
 	font: "DejaVu Sans Mono 9";			//Font
 	//Colors
-	foreground: 					@fg; 				//Text
-	background: 					@bg; 				//Background
+	foreground: 					@onSurface; 				//Text
+	background: 					@background; 				//Background
 	accent: 						@green; 					//Highlight
 	foreground-selection:			@background; 	//Selection_fg
 	background-selection: 			@green; 		//Selection_bg
@@ -52,7 +52,7 @@ listview {
 	fixed-height:	false;
 	border:			0;
 	scrollbar:		false;
-	text-color:		@separatorcolor;
+	text-color:		@secondaryparatorcolor;
 }
 element {
 	border:			0;
@@ -76,16 +76,16 @@ element.normal.active {
 	background-color:	@active-background;
 }
 element.selected.normal {
-	text-color:			@selected-normal-foreground;
-	background-color:	@selected-normal-background;
+	text-color:			@secondarylected-normal-foreground;
+	background-color:	@secondarylected-normal-background;
 }
 element.selected.urgent {
-	text-color:			@selected-urgent-foreground;
-	background-color:	@selected-urgent-background;
+	text-color:			@secondarylected-urgent-foreground;
+	background-color:	@secondarylected-urgent-background;
 }
 element.selected.active {
-	text-color:			@selected-active-foreground;
-	background-color:	@selected-active-background;
+	text-color:			@secondarylected-active-foreground;
+	background-color:	@secondarylected-active-background;
 }
 element.alternate.normal {
 	text-color:			@alternate-normal-foreground;
@@ -103,8 +103,8 @@ mode-switcher {
 	border:	0;
 }
 button selected {
-	text-color:			@selected-normal-foreground;
-	background-color:	@selected-normal-background;
+	text-color:			@secondarylected-normal-foreground;
+	background-color:	@secondarylected-normal-background;
 }
 button normal {
 	text-color:	@foreground;
