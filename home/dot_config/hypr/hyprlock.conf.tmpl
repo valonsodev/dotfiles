@@ -15,7 +15,7 @@ general {
 # BACKGROUND
 background {
   monitor =
-  path = ~/.config/theming/wallpaper.png
+  path = {{ glob .wallpaper.path | first }}
   blur_passes = 0
   color = $background
   reload_time = 0

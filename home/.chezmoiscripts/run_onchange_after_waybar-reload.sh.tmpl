@@ -10,5 +10,9 @@
 {{ $waybarStyle := joinPath $waybarDir "style.css" }} # Watch waybar styles (derived from theme.json)
 # {{ $waybarStyle }} hash: {{ include $waybarStyle | sha256sum }}
 
-
-pkill -SIGUSR2 waybar 2> /dev/null
+if ! pgrep -x waybar > /dev/null; then
+    waybar > /dev/null 2>&1 &
+    sleep 1 # Give waybar a moment to start
+else
+    nohup pkill -SIGUSR2 waybar > /dev/null 2>&1
+fi

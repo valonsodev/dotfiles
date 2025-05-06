@@ -3,10 +3,8 @@
 #!/bin/sh
 {{ $themingFolder := joinPath .chezmoi.homeDir ".config" "theming" }}
 
-
-{{ $wallpaperFile := joinPath $themingFolder "wallpaper.png" }}
-# {{ $wallpaperFile }}
-# wallpaper.png hash: {{ include $wallpaperFile | sha256sum }}
+{{ $wallpaperFile := glob .wallpaper.path | first }}
+# {{ $wallpaperFile }} hash: {{ include $wallpaperFile | sha256sum }}
 
 {{ $materialCli := joinPath .chezmoi.homeDir ".config" "theming" "material_theme" }}
 # {{ $materialCli }}

@@ -5,19 +5,10 @@
 # Exit on error
 set -e
 
-# Define base paths using Go template for chezmoi context
-{{ $sourceDir := joinPath .chezmoi.sourceDir "dot_config" "theming" }}
-SOURCE_DIR_THEMING="{{ $sourceDir }}"
-WALLPAPER_BASE_DIR="${SOURCE_DIR_THEMING}/wallpapers" # Base for light/dark subdirs
-LIGHT_WALLPAPERS_DIR="${WALLPAPER_BASE_DIR}/light"
-DARK_WALLPAPERS_DIR="${WALLPAPER_BASE_DIR}/dark"
-
-{{ $destDir := joinPath .chezmoi.homeDir ".config" "theming" }}
-# Define the output file for the selected wallpaper
-OUTPUT_WALLPAPER_FILE="{{ joinPath $destDir "wallpaper.png" }}"
-
-# Define the material theme CLI path
-MATERIAL_THEME_CLI="{{ joinPath .chezmoi.homeDir ".config" "theming" "material_theme" }}"
+# Define paths using Go template variables for direct use in the script
+{{- $lightWallpapersDir := joinPath .chezmoi.sourceDir "dot_config" "theming" "wallpapers" "light" -}}
+{{- $darkWallpapersDir := joinPath .chezmoi.sourceDir "dot_config" "theming" "wallpapers" "dark" -}}
+{{- $outputWallpaperFileBase := joinPath .chezmoi.homeDir ".config" "theming" "wallpaper" -}}
 
 # --- Shell script logic starts here ---
 light_mode=false
@@ -49,20 +40,16 @@ if ! $light_mode && ! $dark_mode; then
 fi
 
 declare -a search_paths
-current_material_args=""
 
 if $light_mode && $dark_mode; then
   echo "Searching for wallpapers in both light and dark directories."
-  search_paths=("$LIGHT_WALLPAPERS_DIR" "$DARK_WALLPAPERS_DIR")
-  # current_material_args will be determined based on the chosen wallpaper's path
+  search_paths=("{{ $lightWallpapersDir }}" "{{ $darkWallpapersDir }}")
 elif $light_mode; then
-  echo "Searching for light wallpapers in: $LIGHT_WALLPAPERS_DIR"
-  search_paths=("$LIGHT_WALLPAPERS_DIR")
-  current_material_args="--light"
+  echo "Searching for light wallpapers in: {{ $lightWallpapersDir }}"
+  search_paths=("{{ $lightWallpapersDir }}")
 elif $dark_mode; then
-  echo "Searching for dark wallpapers in: $DARK_WALLPAPERS_DIR"
-  search_paths=("$DARK_WALLPAPERS_DIR")
-  current_material_args="--dark"
+  echo "Searching for dark wallpapers in: {{ $darkWallpapersDir }}"
+  search_paths=("{{ $darkWallpapersDir }}")
 fi
 
 # Select a random image
@@ -77,27 +64,18 @@ fi
 
 echo "Selected wallpaper: $RANDOM_IMAGE"
 
-# Determine material_args if searching in both light and dark directories
-if $light_mode && $dark_mode; then
-  # Check if the RANDOM_IMAGE path contains the light or dark directory names
-  # This assumes your light/dark directories are named 'light' and 'dark'
-  if [[ "$RANDOM_IMAGE" == *"${LIGHT_WALLPAPERS_DIR}/"* ]]; then
-    current_material_args="--light"
-    echo "Determined theme: --light (from wallpaper path)"
-  elif [[ "$RANDOM_IMAGE" == *"${DARK_WALLPAPERS_DIR}/"* ]]; then
-    current_material_args="--dark"
-    echo "Determined theme: --dark (from wallpaper path)"
-  else
-    # Fallback if path doesn't match expected subfolder structure clearly
-    echo "Warning: Could not reliably determine theme from wallpaper path when searching both. Defaulting to --dark."
-    current_material_args="--dark"
-  fi
-fi
+# Extract the extension from the selected wallpaper
+extension="${RANDOM_IMAGE##*.}"
+# Construct the actual output wallpaper filename with the original extension
+ACTUAL_OUTPUT_WALLPAPER_FILE="{{ $outputWallpaperFileBase }}.${extension}"
 
-# Copy the selected image to the output file location
-echo "Copying '$RANDOM_IMAGE' to '$OUTPUT_WALLPAPER_FILE'"
-cp "$RANDOM_IMAGE" "$OUTPUT_WALLPAPER_FILE"
+# Remove previous wallpapers
+rm {{ glob .wallpaper.path | first }}
 
-chezmoi apply
+# Copy the selected image to the output file location, preserving its extension
+echo "Copying '$RANDOM_IMAGE' to '$ACTUAL_OUTPUT_WALLPAPER_FILE'"
+cp "$RANDOM_IMAGE" "$ACTUAL_OUTPUT_WALLPAPER_FILE"
 
 echo "Script finished successfully."
+
+chezmoi apply
