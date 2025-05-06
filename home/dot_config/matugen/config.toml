@@ -1,0 +1,53 @@
+[config.wallpaper]
+command = "swww"
+arguments = ["img", "--transition-type", "center"]
+set = true
+
+[templates.hyprland]
+input_path = './templates/hyprland.conf'
+output_path = '~/.config/hypr/material.conf'
+post_hook = 'hyprctl reload'
+
+[templates.waybar]
+input_path = './templates/waybar.css'
+output_path = '~/.config/waybar/colors.css'
+post_hook = 'pkill -SIGUSR2 waybar'
+
+
+[templates.rofi]
+input_path = './templates/rofi.rasi'
+output_path = '~/.config/rofi/colors.rasi'
+
+[templates.alacritty]
+input_path = './templates/alacritty.toml'
+output_path = '~/.config/alacritty/colors.toml'
+
+[templates.mako]
+input_path = './templates/mako'
+output_path = '~/.config/mako/config'
+post_hook = 'makoctl reload && notify-send -u critical -t 2000 "Mako reloaded" "Reloaded Mako config"'
+
+[templates.gtk3]
+input_path = './templates/gtk.css'
+output_path = '~/.config/gtk-3.0/colors.css'
+
+[templates.gtk4]
+input_path = './templates/gtk.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+
+[templates.flameshot]
+input_path = './templates/flameshot.ini'
+output_path = '~/.config/flameshot/flameshot.ini'
+
+[templates.atuin]
+input_path = './templates/atuin.toml'
+output_path = '~/.config/atuin/themes/material.toml'
+
+[templates.vesktop]
+input_path = './templates/vesktop.css'
+output_path = '~/.config/vesktop/themes/material.css'
+
+
+[templates.screen_record]
+input_path = './templates/scripts/screen_record.notification'
+output_path = '~/.config/scripts/screen_record/screen_recording.notification'

@@ -1,0 +1,23 @@
+{{ warnf "dot_config/mako/config.tmpl\n" -}}
+
+sort=-time
+layer=top
+background-color={{ "{{ colors.secondary_container.default.hex }}" }}
+border-color={{ "{{ colors.secondary.default.hex }}" }}
+text-color={{ "{{ colors.on_secondary_container.default.hex }}" }}
+
+font={{ $.font.family }} 10
+width=300
+height=150
+border-size=2
+border-radius=5
+padding=16
+icons=1
+max-icon-size=64
+default-timeout=5000
+ignore-timeout=1
+margin=8
+
+[category=screen_recording]
+text-alignment=center
+width=200

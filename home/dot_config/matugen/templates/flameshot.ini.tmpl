@@ -1,6 +1,5 @@
 {{ warnf "dot_config/flameshot/flameshot.ini.tmpl\n" -}}
 
-{{ $theme := (include (joinPath .chezmoi.homeDir ".config" "theming" "theme.json") | fromJson) -}}
 [General]
 ;; Opacity of area outside selection (int in range 0-255)
 contrastOpacity=188
@@ -22,15 +21,15 @@ saveAsFileExtension=.png
 
 ;; Main UI color
 ;; Color is any valid hex code or W3C color name
-uiColor={{ $theme.primary | default "#740096" }}
+uiColor={{ "{{ colors.primary.default.hex }}" }}
 
 ;; Contrast UI color
 ;; Color is any valid hex code or W3C color name
-contrastUiColor={{ $theme.secondaryContainer | default "#270032" }}
+contrastUiColor={{ "{{ colors.secondary_container.default.hex }}" }}
 
 ;; Last used color
 ;; Color is any valid hex code or W3C color name
-drawColor={{ $theme.error | default "#ff0000" }}
+drawColor={{ "{{ colors.error.default.hex }}" }}
 
 ;; Show desktop notifications (bool)
 showDesktopNotification=true
@@ -48,8 +47,7 @@ useJpgForClipboard=false
 ;; The colors are arranged counter-clockwise with the first being set to the right of the cursor
 ;; Colors are any valid hex code or W3C color name
 ;; "picker" adds a custom color picker
-userColors=picker, {{ $theme.primary | default "#800000" }}, {{ $theme.error | default "#ff0000" }}, {{ $theme.secondary | default "#00ff00" }}, {{ $theme.tertiary | default "#008000" }}, {{ $theme.secondaryContainer | default "#00ffff" }}, {{ $theme.primaryContainer | default "#0000ff" }}, {{ $theme.surface | default "#ff00ff" }}, {{ $theme.onSurface | default "#800080" }}
-
+userColors=picker, {{ "{{ colors.primary.default.hex }}" }}, {{ "{{ colors.error.default.hex }}" }}, {{ "{{ colors.secondary.default.hex }}" }}, {{ "{{ colors.tertiary.default.hex }}" }}, {{ "{{ colors.secondary_container.default.hex }}" }}, {{ "{{ colors.primary_container.default.hex }}" }}, {{ "{{ colors.surface.default.hex }}" }}, {{ "{{ colors.on_surface.default.hex }}" }}
 
 ;; DEFAULTS
 ;
@@ -63,7 +61,7 @@ userColors=picker, {{ $theme.primary | default "#800000" }}, {{ $theme.error | d
 ;ignoreUpdateToVersion=
 ;
 ;; Disable Grim Warning notification
-;disabledGrimWarning=true
+disabledGrimWarning=true
 ;
 ;; Automatically close daemon when it's not needed (not available on Windows)
 ;autoCloseIdleDaemon=false

@@ -1,6 +1,3 @@
 [font]
 size = 10
 family = "JetBrainsMono Nerd Font Mono"
-
-[wallpaper]
-path = "/home/valonso/.config/theming/wallpaper.*" # !!ABSOLUTE!! GLOB: https://www.chezmoi.io/reference/templates/functions/glob/

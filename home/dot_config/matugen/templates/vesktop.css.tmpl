@@ -1,0 +1,40 @@
+{{ warnf "dot_config/vesktop/themes/material.css.tmpl\n" -}}
+@import 'colors.css';
+@import url(https://mwittrien.github.io/BetterDiscordAddons/Themes/DiscordRecolor/DiscordRecolor.css);
+:root {
+  /* Matugen colors */
+  <* for name, value in colors *>
+  --{{ "{{name | camel_case}}" }}: {{ "{{value.default.red}}" }}, {{ "{{value.default.green}}" }}, {{ "{{value.default.blue}}" }};
+  <* endfor *>
+
+  /* Discord recolor */
+  --settingsicons:		1;				/*	Use Settings Icons in User Settings: 1 = yes, 0 = no							*/
+  --font: '{{ $.font.family }}', 'JetBrainsMono Nerd Font', 'JetBrains Mono', 'Nerd Font', 'Segoe UI', 'Arial', monospace;
+
+  --accentcolor:               var(--tertiary); /* Channel mentions, new messages, notifications, etc. */
+  --accentcolor2:              var(--surfaceTint); /* Server XP bar and little icon on the left of the server name */
+  --linkcolor:                 var(--tertiary); /* Links */
+  --mentioncolor:              var(--surfaceTint); /* Highlight color when mentioned */
+  --successcolor:              var(--secondary); /* The wifi icon and some icons here and there */
+  --warningcolor:              var(--tertiary); /* No clue */
+  --dangercolor:               var(--error); /* Mute button, new messages */
+
+  --textbrightest:             var(--onSecondaryContainer); /* Channels with new messages, server list dot */
+  --textbrighter:              var(--onSurface); /* Normal messages and # in channel list */
+  --textbright:                var(--onSurfaceVariant); /* Quoted messages and lower focus text */
+  --textdark:                  var(--surfaceVariant); /* Read channels, message times, user activity */
+  --textdarker:                var(--surfaceVariant); /* Dates in a channel (message list) and message input text */
+  --textdarkest:               var(--secondaryContainer); /* The little L in channel threads adn some button */
+
+
+  --backgroundtertiary:        var(--surfaceContainerLowest); /* Default background behind everything */
+  --backgroundsecondaryalt:    var(--surfaceContainerLow); /* Channel list background */
+  --backgroundsecondary:       var(--surfaceContainer); /* Main background */
+  
+  --backgroundaccent:          var(--surfaceContainerHighest); /* Highlight background (reactions, selected channel) */
+
+  --backgroundcode:            var(--surfaceDim); /* Code block background */
+  --backgroundprimary:         var(--surfaceContainerHigh); /* Message input and own badge background */
+  
+  --backgroundfloating:        var(--surfaceContainerLowest); /* Popups background */
+}

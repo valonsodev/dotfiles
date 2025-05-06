@@ -72,9 +72,10 @@
     "tooltip": true
   },
   "clock": {
+    "interval": 1,
     // "timezone": "America/New_York",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format": "{:%d/%m/%y %H:%M}"
+    "format": "{:%d/%m/%y %H:%M:%S}"
   },
   "tray": {
     // "icon-size": 21,

@@ -1,0 +1,11 @@
+[theme]
+name = "material"
+
+[colors]
+AlertInfo = "{{ colors.primary.default.hex }}"
+AlertWarn = "{{ colors.tertiary.default.hex }}"
+AlertError = "{{ colors.error.default.hex }}"
+Annotation = "{{ colors.secondary.default.hex }}"
+Base = "{{ colors.background.default.hex }}"
+Guidance = "{{ colors.tertiary_container.default.hex }}"
+Important = "{{ colors.secondary_container.default.hex }}"

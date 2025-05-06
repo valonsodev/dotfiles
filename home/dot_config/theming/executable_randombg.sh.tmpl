@@ -69,13 +69,6 @@ extension="${RANDOM_IMAGE##*.}"
 # Construct the actual output wallpaper filename with the original extension
 ACTUAL_OUTPUT_WALLPAPER_FILE="{{ $outputWallpaperFileBase }}.${extension}"
 
-# Remove previous wallpapers
-rm {{ glob .wallpaper.path | first }}
-
 # Copy the selected image to the output file location, preserving its extension
 echo "Copying '$RANDOM_IMAGE' to '$ACTUAL_OUTPUT_WALLPAPER_FILE'"
-cp "$RANDOM_IMAGE" "$ACTUAL_OUTPUT_WALLPAPER_FILE"
-
-echo "Script finished successfully."
-
-chezmoi apply
+matugen image "$RANDOM_IMAGE"

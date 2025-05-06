@@ -1,6 +1,6 @@
 {{ warnf "dot_config/hypr/hyprlock.conf.tmpl\n" }}
 
-source = ~/.config/hypr/material.conf
+source = material.conf
 
 $font = {{ $.font.family }}
 
@@ -15,7 +15,7 @@ general {
 # BACKGROUND
 background {
   monitor =
-  path = {{ glob .wallpaper.path | first }}
+  path = $image
   blur_passes = 0
   color = $background
   reload_time = 0

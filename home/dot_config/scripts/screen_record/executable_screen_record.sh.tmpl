@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Exit if wf-recorder is running -- kill it gracefully and notify the user
+if pgrep -x "wf-recorder" >/dev/null; then
+    pkill -INT -x wf-recorder
+    notify-send -c screen_recording -h string:wf-recorder:record -t 1000 "Finished Recording"
+    exit 0
+fi
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+TEMPLATE_FILE="$SCRIPT_DIR/screen_recording.notification"
+# Countdown with themed notifications
+for i in 3 2 1; do
+    TIME=$((i == 1 ? 950 : 1000))
+    # read the template, replace $i with current value
+    TEMPLATE=$(<"$TEMPLATE_FILE")
+    BODY="${TEMPLATE//\$i/$i}"
+    notify-send -c screen_recording -h string:wf-recorder:record -t $TIME "Recording in:" "$BODY"
+    sleep 1
+    makoctl dismiss --all
+done
+
+# Start recording on the active monitor
+ACTIVE_MONITOR=$(hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name')
+dateTime=$(date +%m-%d-%Y-%H_%M_%S)
+wf-recorder --bframes max_b_frames -f "$HOME/Videos/$dateTime.mp4" -o "$ACTIVE_MONITOR"

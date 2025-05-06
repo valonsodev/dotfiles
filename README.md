@@ -38,3 +38,4 @@ me falta migrar algun dotfile (los de root) /etc
 me falta mirar los encrypted files de chezmoi
 
 QT AND GTK theming
+FIX WAYBAR CALENDAR

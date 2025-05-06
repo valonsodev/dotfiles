@@ -1,0 +1,1 @@
+<span color='{{ colors.tertiary.default.hex }}' font='26px'><i><b>$i</b></i></span>
