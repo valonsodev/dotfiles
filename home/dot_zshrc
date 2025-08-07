@@ -102,7 +102,9 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+"$HOME/.atuin/bin/env"
 eval "$(atuin init zsh)"
+
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 export PATH="$HOME/.local/bin:$PATH"
@@ -181,4 +183,3 @@ export PATH=$PATH:$GOAROOT/bin
 
 
 alias flush="sync & watch -n 1 'grep \"Dirty\" /proc/meminfo'"
-"$HOME/.atuin/bin/env"
