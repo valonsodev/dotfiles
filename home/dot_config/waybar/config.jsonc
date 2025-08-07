@@ -12,6 +12,7 @@
     "tray",
     "disk",
     "mpd",
+    "custom/brightness",
     "pulseaudio",
     "keyboard-state",
     "network",
@@ -119,5 +120,13 @@
     "interval": 180,
     "format": "{used} / {total}",
     "format-alt": "{percentage_used}%"
+  },
+  "custom/brightness": {
+    "exec": "ddcutil -b 4 getvcp 10 -t | perl -nE 'if (/ C (\\d+) /) { say $1; }'",
+    "format": "{}% {icon}",
+    "format-icons": [""],
+    "interval": "once",
+    "on-scroll-up": "ddcutil -b 4 setvcp 10 + 10",
+    "on-scroll-down": "ddcutil -b 4 setvcp 10 - 10"
   }
 }

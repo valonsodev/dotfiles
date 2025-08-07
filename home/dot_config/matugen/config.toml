@@ -3,6 +3,27 @@ command = "swww"
 arguments = ["img", "--transition-type", "center"]
 set = true
 
+[config.custom_colors]
+red = "#EF5350"
+pink = "#EC407A"
+purple = "#AB47BC"
+deep_purple = "#7E57C2"
+indigo = "#5C6BC0"
+blue = "#42A5F5"
+light_blue = "#29B6F6"
+cyan = "#26C6DA"
+teal = "#26A69A"
+green = "#66BB6A"
+light_green = "#9CCC65"
+lime = "#D4E157"
+yellow = "#FFEE58"
+amber = "#FFCA28"
+orange = "#FFA726"
+deep_orange = "#FF7043"
+brown = "#8D6E63"
+gray = "#BDBDBD"
+blue_gray = "#78909C"
+
 [templates.hyprland]
 input_path = './templates/hyprland.conf'
 output_path = '~/.config/hypr/material.conf'

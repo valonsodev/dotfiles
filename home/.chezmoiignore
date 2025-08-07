@@ -1,5 +1,4 @@
-.config/theming/theme.json
-.config/mako/config
-.config/hypr/material.conf
 .config/flameshot/flameshot.ini
-.config/vesktop/vesktop.css.tmpl
+.config/hypr/material.conf
+.config/mako/config
+.config/vesktop/themes/material.css

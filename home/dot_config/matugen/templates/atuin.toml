@@ -2,10 +2,29 @@
 name = "material"
 
 [colors]
-AlertInfo = "{{ colors.primary.default.hex }}"
-AlertWarn = "{{ colors.tertiary.default.hex }}"
-AlertError = "{{ colors.error.default.hex }}"
-Annotation = "{{ colors.secondary.default.hex }}"
-Base = "{{ colors.background.default.hex }}"
-Guidance = "{{ colors.tertiary_container.default.hex }}"
-Important = "{{ colors.secondary_container.default.hex }}"
+# AlertInfo = "{{ colors.primary.default.hex }}"
+# AlertWarn = "{{ colors.tertiary.default.hex }}"
+# AlertError = "{{ colors.error.default.hex }}"
+# Annotation = "{{ colors.secondary.default.hex }}"
+# Base = "{{ colors.background.default.hex }}"
+# Guidance = "{{ colors.tertiary_container.default.hex }}"
+# Important = "{{ colors.secondary_container.default.hex }}"
+
+# [colors]
+# AlertInfo = "#00ff00"       # Bright green for informational messages
+# AlertWarn = "#ffcc00"       # Yellow to capture attention for warnings
+# AlertError = "#ff0033"      # Red for critical errors needing immediate action
+# Annotation = "#888888"      # Gray for supporting text, unobtrusive but readable
+# Base = "#ffffff"            # Default foreground color (white for readability)
+# Guidance = "#888844"        # Muted yellow-green for instructive text
+# Important = "#ff6600"       # Orange for high-priority information
+# Title = "#ff66ff"           # Vibrant pink for headings to match the cyberpunk theme
+
+AlertInfo   = "{{ colors.light_green.default.hex }}"
+AlertWarn   = "{{ colors.amber.default.hex }}"    # Amber 600 for attention-grabbing warnings
+AlertError  = "{{ colors.red.default.hex }}"     # Red 600 for critical errors
+Annotation  = "{{ colors.gray.default.hex }}"    # Gray 600 for unobtrusive supporting text
+Base        = "{{ colors.on_background.default.hex }}" # Default foreground color (white for readability)
+Guidance    = "{{ colors.teal.default.hex }}"    # Teal 600 for instructive text
+Important   = "{{ colors.orange.default.hex }}"  # Orange 600 for high-priority information
+Title       = "{{ colors.purple.default.hex }}"  # Purple 600 for headings to match the cyberpunk theme
