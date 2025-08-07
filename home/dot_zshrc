@@ -181,3 +181,4 @@ export PATH=$PATH:$GOAROOT/bin
 
 
 alias flush="sync & watch -n 1 'grep \"Dirty\" /proc/meminfo'"
+"$HOME/.atuin/bin/env"
