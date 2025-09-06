@@ -180,6 +180,9 @@ export PATH=$PATH:$GOAROOT/bin
 [[ -f /home/valonso/.dart-cli-completion/zsh-config.zsh ]] && . /home/valonso/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
-
+alias yolo='git add -A && git commit -am "`curl -sL http://whatthecommit.com/index.txt`" && git push -f origin main'
 
 alias flush="sync & watch -n 1 'grep \"Dirty\" /proc/meminfo'"
+alias cd="z"
+alias ls="lsd -l"
+eval "$(zoxide init zsh)"

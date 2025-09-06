@@ -68,6 +68,10 @@ output_path = '~/.config/atuin/themes/material.toml'
 input_path = './templates/vesktop.css'
 output_path = '~/.config/vesktop/themes/material.css'
 
+[templates.foot]
+input_path = './templates/foot.ini'
+output_path = '~/.config/foot/foot.ini'
+
 
 [templates.screen_record]
 input_path = './templates/scripts/screen_record.notification'
