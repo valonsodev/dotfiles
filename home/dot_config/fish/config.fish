@@ -52,8 +52,12 @@ function tree --description 'lsd --tree' -w lsd
 end
 
 function cd --description 'Never again cd, use z' -w cd
-    # Echo a message to use 'z'
-    echo "Use 'z' my guy"
+    # Echo only on non-Debian systems
+    if test -f /etc/os-release
+        if not command grep -qi 'debian' /etc/os-release
+            echo "Use 'z' my guy"
+        end
+    end
     builtin cd $argv
 end
 
