@@ -151,6 +151,23 @@ function sudo --description 'Use sudo with !! support' -w sudo
     end
 end
 
+function kanidm --description 'Run kanidm in a Docker container'
+    if not test $HOME/.config/kanidm
+        mkdir -p $HOME/.config/kanidm
+    end
+    if not test $HOME/.cache/kanidm_tokens
+        mkdir -p $HOME/.cache/kanidm_tokens
+    end
+
+    docker run --rm -i -t \
+       --network host \
+       --mount "type=bind,src=$HOME/.config/kanidm,target=/root/.config/kanidm" \
+       --mount "type=bind,src=$HOME/.cache/kanidm_tokens,target=/root/.cache/kanidm_tokens" \
+       kanidm/tools:latest \
+       /sbin/kanidm $argv
+end
+
+
 function yolo --description 'Git add, commit with timestamp + random openssl hex message (optional repo path)'
     # Optional first arg: target repository directory (defaults to current dir)
     set -l target_dir (pwd)
@@ -235,7 +252,7 @@ function fish_greeting
     "This world is a buggy program. So it cries out for the flame." \
     "Darkness and obscurity are banished by artificial lighting, and the seasons by air conditioning.\n\nNight and summer are losing their charm and dawn is disappearing.\n\nThe urban population think they have escaped from cosmic reality, but there is no corresponding expansion of their dream life.\n\nThe reason is clear: dreams spring from reality and are realized in it." \
     "Quizás lo que nos une son las baddies que fumbleamos por el camino."
-    echo -e (random choice $phrases)
+    echo -e (random choice $phrases) "\n"
 end
 
 function fish_prompt --description 'Custom prompt: user@host path git:(branch)->'
