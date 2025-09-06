@@ -51,11 +51,11 @@ function tree --description 'lsd --tree' -w lsd
     lsd --tree $argv
 end
 
-# function cd --description 'Never again cd, use z' -w cd
-#     # Echo a message to use 'z'
-#     echo "Use 'z' my guy"
-#     builtin cd $argv
-# end
+function cd --description 'Never again cd, use z' -w cd
+    # Echo a message to use 'z'
+    echo "Use 'z' my guy"
+    builtin cd $argv
+end
 
 function mkdir --description 'mkdir -p always' -w mkdir
     command mkdir -p $argv
