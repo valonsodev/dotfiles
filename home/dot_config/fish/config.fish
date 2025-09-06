@@ -54,7 +54,7 @@ end
 function cd --description 'Never again cd, use z' -w cd
     # Echo a message to use 'z'
     echo "Use 'z' my guy"
-    cd $argv
+    command cd $argv
 end
 
 function mkdir --description 'mkdir -p always' -w mkdir
