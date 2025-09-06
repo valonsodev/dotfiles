@@ -305,7 +305,6 @@ function lab --description 'Sync homelab git repos (only those with changes)'
         echo "Homelab directory not found: $base_dir"
         return 1
     end
-
     set -l updated 0
     for dir in $base_dir/*/
         if test -d $dir/.git
@@ -314,6 +313,18 @@ function lab --description 'Sync homelab git repos (only those with changes)'
                 echo "Processing repository with changes: $dir"
                 yolo $dir
                 set updated (math $updated + 1)
+            end
+        else
+            # Check second level of depth
+            for subdir in $dir/*/
+                if test -d $subdir/.git
+                    set -l changes (git -C $subdir status --porcelain 2>/dev/null)
+                    if test -n "$changes"
+                        echo "Processing repository with changes: $subdir"
+                        yolo $subdir
+                        set updated (math $updated + 1)
+                    end
+                end
             end
         end
     end
