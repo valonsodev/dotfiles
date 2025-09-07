@@ -156,7 +156,7 @@ function kanidm --description 'Run kanidm in a Docker container'
         mkdir -p $HOME/.config/kanidm
     end
     if not test $HOME/.cache/kanidm_tokens
-        mkdir -p $HOME/.cache/kanidm_tokens
+        touch $HOME/.cache/kanidm_tokens
     end
 
     docker run --rm -i -t \
