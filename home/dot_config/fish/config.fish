@@ -248,6 +248,9 @@ end
     
 # Greeting
 function fish_greeting
+    if test (hostname) = "stargazer"
+        return
+    end
     set -l phrases \
     "This world is a buggy program. So it cries out for the flame." \
     "Darkness and obscurity are banished by artificial lighting, and the seasons by air conditioning.\n\nNight and summer are losing their charm and dawn is disappearing.\n\nThe urban population think they have escaped from cosmic reality, but there is no corresponding expansion of their dream life.\n\nThe reason is clear: dreams spring from reality and are realized in it." \
