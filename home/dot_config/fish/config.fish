@@ -337,6 +337,28 @@ function lab --description 'Manage homelab git repos: default commit/push change
     end
 
     if test $mode = sync
+        # Ensure each repo has origin/main upstream (without changing current HEAD)
+        for repo in $repos
+            # Skip if no origin remote
+            if not git -C $repo remote get-url origin >/dev/null 2>&1
+                continue
+            end
+            # Check if origin has main
+            if git -C $repo ls-remote --exit-code --heads origin main >/dev/null 2>&1
+                # Create local main if missing (without checkout)
+                if not git -C $repo rev-parse --verify main >/dev/null 2>&1
+                    echo "[lab] Creating local 'main' in $repo"
+                    git -C $repo branch main origin/main >/dev/null 2>&1
+                end
+                # Ensure upstream tracking for local main
+                if git -C $repo rev-parse --verify main >/dev/null 2>&1
+                    set -l upstream (git -C $repo for-each-ref --format='%(upstream:short)' refs/heads/main 2>/dev/null)
+                    if test -z "$upstream"
+                        git -C $repo branch --set-upstream-to=origin/main main >/dev/null 2>&1
+                    end
+                end
+            end
+        end
         set -l synced 0
         for repo in $repos
             echo "Pulling: $repo"
