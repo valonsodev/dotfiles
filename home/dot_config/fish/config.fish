@@ -302,33 +302,59 @@ function fish_prompt --description 'Custom prompt: user@host path git:(branch)->
         "$c_arrow" "$c_norm"
 end
 
-function lab --description 'Sync homelab git repos (only those with changes)'
+function lab --description 'Manage homelab git repos: default commit/push changed ones, `lab sync` pulls all'
     set -l base_dir $HOME/code/homelab
     if not test -d $base_dir
         echo "Homelab directory not found: $base_dir"
         return 1
     end
-    set -l updated 0
+
+    # Mode detection (default=changes, alt=sync)
+    set -l mode changes
+    if test (count $argv) -ge 1
+        if test "$argv[1]" = sync
+            set mode sync
+        end
+    end
+
+    # Collect repositories (one or two levels deep)
+    set -l repos
     for dir in $base_dir/*/
         if test -d $dir/.git
-            set -l changes (git -C $dir status --porcelain 2>/dev/null)
-            if test -n "$changes"
-                echo "Processing repository with changes: $dir"
-                yolo $dir
-                set updated (math $updated + 1)
-            end
+            set repos $repos $dir
         else
-            # Check second level of depth
             for subdir in $dir/*/
                 if test -d $subdir/.git
-                    set -l changes (git -C $subdir status --porcelain 2>/dev/null)
-                    if test -n "$changes"
-                        echo "Processing repository with changes: $subdir"
-                        yolo $subdir
-                        set updated (math $updated + 1)
-                    end
+                    set repos $repos $subdir
                 end
             end
+        end
+    end
+
+    if test -z "$repos"
+        echo "No repositories found under $base_dir"
+        return 0
+    end
+
+    if test $mode = sync
+        set -l synced 0
+        for repo in $repos
+            echo "Pulling: $repo"
+            git -C $repo pull --ff-only 2>/dev/null
+            set synced (math $synced + 1)
+        end
+        echo "Synced $synced repositories."
+        return 0
+    end
+
+    # Default mode: act only on repositories with local changes
+    set -l updated 0
+    for repo in $repos
+        set -l changes (git -C $repo status --porcelain 2>/dev/null)
+        if test -n "$changes"
+            echo "Processing repository with changes: $repo"
+            yolo $repo
+            set updated (math $updated + 1)
         end
     end
 
