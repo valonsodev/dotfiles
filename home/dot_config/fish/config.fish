@@ -6,9 +6,6 @@ set -x SSH_AUTH_SOCK $XDG_RUNTIME_DIR/ssh-agent.socket
 # Android SDK
 set -x ANDROID_HOME $HOME/Android/Sdk
 
-# Node Version Manager (sourcing happens later if desired)
-set -x NVM_DIR $HOME/.nvm
-
 # PNPM
 set -x PNPM_HOME $HOME/.local/share/pnpm
 fish_add_path $PNPM_HOME
@@ -396,6 +393,8 @@ if status is-interactive
 
     atuin init fish | source
     bind up _atuin_bind_up
+
+    fnm env --use-on-cd --shell fish | source
 
     set -g fish_handle_reflow 0
 end
