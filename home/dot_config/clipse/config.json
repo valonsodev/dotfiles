@@ -6,8 +6,8 @@
     "tempDir": "/tmp/clipse",
     "imageDisplay": {
         "type": "sixel",
-        "scaleX": 5,
-        "scaleY": 5,
-        "heightCut": 2
+        "scaleX": 15,
+        "scaleY": 15,
+        "heightCut": 5
      }
 }
