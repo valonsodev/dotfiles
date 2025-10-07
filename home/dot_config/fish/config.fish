@@ -42,7 +42,7 @@ function ls --description 'Use lsd instead of ls' -w lsd
 end
 
 function ll --description 'Use lsd -l' -w lsd
-    lsd -l -a $argv
+    lsd -l -A $argv
 end
 function tree --description 'lsd --tree' -w lsd
     lsd --tree $argv
@@ -63,7 +63,7 @@ function mkdir --description 'mkdir -p always' -w mkdir
 end
 
 function ipa --description 'List all ips, briefly' -w ip
-    command ip -br addr show
+    command ip --color -br addr show
 end
 
 function nano --description 'Use micro instead of nano' -w micro
@@ -119,7 +119,7 @@ function up --description 'go up n directories'
     for i in (seq $levels)
         set path $path'../'
     end
-    z $path
+    command cd $path
 end
 
 function ff --description 'fastfetch' -w fastfetch
@@ -251,14 +251,16 @@ function fish_greeting
     set -l phrases \
     "This world is a buggy program. So it cries out for the flame." \
     "Darkness and obscurity are banished by artificial lighting, and the seasons by air conditioning.\n\nNight and summer are losing their charm and dawn is disappearing.\n\nThe urban population think they have escaped from cosmic reality, but there is no corresponding expansion of their dream life.\n\nThe reason is clear: dreams spring from reality and are realized in it." \
-    "Quizás lo que nos une son las baddies que fumbleamos por el camino."
+    "Quizás lo que nos une son las baddies que fumbleamos por el camino." \
+    "Pray for a world where children become wolves."
     echo -e (random choice $phrases) "\n"
 end
 
+set -g __prompt_user (whoami)
+set -g __prompt_host (hostname -s)
+
 function fish_prompt --description 'Custom prompt: user@host path git:(branch)->'
     set -l last_status $status
-    set -l user (whoami)
-    set -l host (hostname -s)
     set -l cwd (prompt_pwd)
 
     # Git branch detection (check .git directory or file in current dir)
@@ -293,8 +295,8 @@ function fish_prompt --description 'Custom prompt: user@host path git:(branch)->
         set git_segment (printf ' %sgit:%s(%s%s%s)%s' "$c_git" "$c_norm" "$c_branch" "$branch" "$c_norm" "$c_norm")
     end
 
-    printf '%s%s%s@%s%s %s%s%s%s%s %s\n->%s ' \
-        "$c_user" "$user" "$c_norm" "$c_host" "$host" \
+    printf '%s%s%s@%s%s %s%s%s%s%s %s->%s ' \
+        "$c_user" "$__prompt_user" "$c_norm" "$c_host" "$__prompt_host" \
         "$c_path" "$cwd" "$c_norm" "$git_segment" "$status_segment" \
         "$c_arrow" "$c_norm"
 end
