@@ -24,8 +24,20 @@ set -x GEM_PATH $GEM_HOME
 fish_add_path $GEM_HOME/bin
 
 # Go
-set -x GOROOT $HOME/go
-fish_add_path $GOROOT/bin
+set -x GOPATH $HOME/go
+set -x GOMODCACHE $GOPATH/pkg/mod
+set -x GOPROXY https://proxy.golang.org,direct
+set -x GOSUMDB sum.golang.org
+fish_add_path $GOPATH/bin
+
+# Guard against a broken GOROOT leaking into the environment.
+# On Arch (and most distros) you should NOT set GOROOT; the Go tool knows it.
+# If GOROOT is set to GOPATH or $HOME/go, stdlib lookups will fail ("package fmt is not in std").
+if set -q GOROOT
+    if test "$GOROOT" = "$GOPATH"; or test "$GOROOT" = "$HOME/go"
+        set -e GOROOT
+    end
+end
 
 # Local user tools
 fish_add_path $HOME/.local/bin
