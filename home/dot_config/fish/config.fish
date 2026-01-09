@@ -23,6 +23,8 @@ set -x GEM_HOME $HOME/.local/share/gem/ruby/3.3.0
 set -x GEM_PATH $GEM_HOME
 fish_add_path $GEM_HOME/bin
 
+fish_add_path $HOME/code/reverse/tools/jadx/bin
+
 # Go
 set -x GOPATH $HOME/go
 set -x GOMODCACHE $GOPATH/pkg/mod
@@ -60,15 +62,9 @@ function tree --description 'lsd --tree' -w lsd
     lsd --tree $argv
 end
 
-function cd --description 'Never again cd, use z' -w cd
-    # Echo only on non-Debian systems
-    if test -f /etc/os-release
-        if not command grep -qi 'debian' /etc/os-release
-            echo "Use 'z' my guy"
-        end
-    end
-    builtin cd $argv
-end
+# function cd --description 'Never again cd, use z' -w cd
+#     builtin cd $argv
+# end
 
 function mkdir --description 'mkdir -p always' -w mkdir
     command mkdir -p $argv
@@ -82,21 +78,21 @@ function nano --description 'Use micro instead of nano' -w micro
     micro $argv
 end
 
-function find --description 'Use fd instead of find' -w fd
-    fd $argv
-end
+# function find --description 'Use fd instead of find' -w fd
+#     fd $argv
+# end
 
 function lines --description 'Print line numbers with wc -l' -w wc
     command wc -l $argv
 end
 
-function grep --description 'Use rg instead of grep' -w rg
-    rg $argv
-end
+# function grep --description 'Use rg instead of grep' -w rg
+#     rg $argv
+# end
 
-function cat --description 'Use bat instead of cat' -w bat
-    bat $argv
-end
+# function cat --description 'Use bat instead of cat' -w bat
+#     bat $argv
+# end
 
 function diff --description 'Use delta instead of diff' -w delta
     delta $argv
@@ -177,11 +173,21 @@ function kanidm --description 'Run kanidm in a Docker container'
 end
 
 
-function yolo --description 'Git add, commit with timestamp + random openssl hex message (optional repo path)'
-    # Optional first arg: target repository directory (defaults to current dir)
+function yolo --description 'Git add, commit with timestamp + random openssl hex message (optional repo path, use "remote" or "r" to push)'
     set -l target_dir (pwd)
-    if test (count $argv) -ge 1
-        set target_dir $argv[1]
+    set -l do_push 0
+
+    for arg in $argv
+        if test "$arg" = remote; or test "$arg" = r
+            set do_push 1
+        else if test -d "$arg"
+            set target_dir $arg
+        end
+    end
+    if test $do_push -eq 1
+        echo "remote ENABLED"
+    else
+        echo "remote DISABLED"
     end
 
     if not test -d $target_dir
@@ -199,7 +205,6 @@ function yolo --description 'Git add, commit with timestamp + random openssl hex
         return 1
     end
 
-    # Fixed random length (12 bytes -> 24 hex chars)
     set -l hex (openssl rand -hex 12 2>/dev/null)
     if test -z "$hex"
         echo "Failed to generate random message"
@@ -209,9 +214,13 @@ function yolo --description 'Git add, commit with timestamp + random openssl hex
     set -l stamp (date "+%H:%M %d/%m/%Y")
     set -l msg "$stamp  -  $hex"
 
+
     git -C $target_dir add -A
     git -C $target_dir commit -m "$msg"
-    git -C $target_dir push origin main
+    if test $do_push -eq 1
+        git -C $target_dir push origin main
+    else
+    end
 end
 
 function flush --description 'Flush filesystem buffers (background) and monitor dirty pages'
@@ -236,7 +245,6 @@ function jar2exec --description 'Create a self-executing jar from a .jar file'
 	set filename (string replace -r '\\.jar$' '' (basename $jarfile))
 	set target_dir "$HOME/.local/bin"
 	mkdir -p $target_dir
-	# NOTE: This reproduces original behavior, but resulting file won't be a valid self-executing jar on all systems.
 	echo '#!/usr/bin/java -jar' > $target_dir/$filename
 	cat $jarfile >> $target_dir/$filename
 	chmod +x $target_dir/$filename
@@ -386,7 +394,7 @@ function lab --description 'Manage homelab git repos: default commit/push change
         set -l changes (git -C $repo status --porcelain 2>/dev/null)
         if test -n "$changes"
             echo "Processing repository with changes: $repo"
-            yolo $repo
+            yolo remote $repo
             set updated (math $updated + 1)
         end
     end
@@ -399,6 +407,17 @@ end
 function duf --description 'Docker compose down, up --force-recreate' -w 'docker compose'
     docker compose down
     docker compose up --force-recreate $argv
+end
+
+function reflect --description 'Update Arch and EndeavourOS mirrorlists'
+    sudo reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+    if type -q eos-rankmirrors
+        sudo eos-rankmirrors --verbose --sort rate
+    end
+end
+
+function pacsync --description 'Sync pacman repositories'
+    yay -Sy
 end
 
 # --- Shell integrations ---

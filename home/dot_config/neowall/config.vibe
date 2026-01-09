@@ -1,0 +1,11 @@
+output {
+    DP-1 {
+        shader moon.glsl
+        shader_speed 0.4
+    }
+    DP-3 {
+        shader moon2.glsl
+        shader_speed 0.4
+    }
+
+}

@@ -1,6 +1,6 @@
 {
     "historyFile": "clipboard_history.json",
-    "maxHistory": 100,
+    "maxHistory": 300,
     "allowDuplicates": false,
     "themeFile": "material_clipse.json",
     "tempDir": "/tmp/clipse",
